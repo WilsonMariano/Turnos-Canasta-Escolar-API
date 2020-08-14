@@ -30,7 +30,8 @@
 
     //Generic
     $app->group('/generic', function () {
-		  $this->get('/all[/]', \GenericApi::class . ':GetAll');         
+          $this->get('/all[/]', \GenericApi::class . ':GetAll');  
+          $this->get('/paged[/]', \GenericApi::class . ':GetPagedWithOptionalFilter');         
     });
 
     $app->group('/empresasDelegados', function () {

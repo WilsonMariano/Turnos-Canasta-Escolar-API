@@ -98,6 +98,12 @@ BEGIN
         valor           varchar(50)  not null
     );
 
+    insert into Diccionario(clave, valor) values
+    ("NIVEL_EDUCACION_1", "Preescolar"),
+    ("NIVEL_EDUCACION_2", "Primaria (1° a 3°)"),
+    ("NIVEL_EDUCACION_1", "Primaria (4° a 6°)"),
+    ("NIVEL_EDUCACION_1", "Secundaria");
+
 
 	
 
