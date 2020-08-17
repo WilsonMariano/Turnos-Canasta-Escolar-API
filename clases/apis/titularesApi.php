@@ -1,14 +1,14 @@
 <?php
 
-require_once __DIR__ . '/../EmpresasDelegados.php';
+require_once __DIR__ . '/../Titulares.php';
 
-class EmpresasDelegadosAPI {
+class TitularesAPI {
 
-    public static function GetOneByCuit($request, $response, $args) {
+    public static function GetOneByCuil($request, $response, $args) {
 
         $apiParams = $request->getQueryParams();
 
-        $listado = EmpresasDelegados::GetByCuit($apiParams["cuit"]);
+        $listado = Titulares::GetByCuil($apiParams["cuil"]);
         
         if($listado)
                 return $response->withJson($listado, 200); 		

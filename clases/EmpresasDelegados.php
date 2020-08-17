@@ -11,11 +11,10 @@ class EmpresasDelegados {
 
     public static function GetByCuit($cuit) {
 
-
         try{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			
-			$consulta = $objetoAccesoDato->RetornarConsulta("select * from empresasDelegados where cuit = :cuit");
+			$consulta = $objetoAccesoDato->RetornarConsulta("select * from EmpresasDelegados where cuit = :cuit");
 			$consulta->bindValue(':cuit' , $cuit, \PDO::PARAM_INT);		
 			$consulta->execute();
 			$objEntidad= PDOHelper::FetchObject($consulta, static::class);

@@ -35,7 +35,15 @@
     });
 
     $app->group('/empresasDelegados', function () {
-		  $this->get('/one[/]', \EmpresasDelegadosApi::class . ':GetOne');         
+		  $this->get('/one[/]', \EmpresasDelegadosApi::class . ':GetOneByCuit');         
+    });
+
+    $app->group('/solicitudes', function () {
+        $this->post('/insert[/]', \SolicitudesApi::class . ':Insert');         
+    });
+
+    $app->group('/titulares', function () {
+        $this->get('/one[/]', \TitularesApi::class . ':GetOneByCuil');         
     });
 
 

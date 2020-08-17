@@ -52,5 +52,39 @@ class Funciones {
 			throw new ErrorException("No se pudieron recuperar entidades del tipo " . $entityName);
 		}
 	}
+
+	public static function InsertOne($obj, $includePK = false) {
+
+		try {  
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+					 
+			//Obtengo el nombre de la clase y sus atributos
+			$entityName = get_class($obj);
+			$arrAtributos = get_class_vars($entityName);
+	
+			//Armo la query SQL dinamicamente
+			$myQuery = "insert into " . $entityName ." (" ;
+			$myQueryAux = "";
+			foreach ($arrAtributos as $atributo => $valor) {
+				if ($atributo != "id" || $includePK){
+					$myQuery .= $atributo .  ",";
+					$myQueryAux .= ":".$atributo.","; 
+				}
+			}
+			$myQuery = rtrim($myQuery,",") . ") values (" . rtrim($myQueryAux,",") . ")" ;
+	
+			//Ejecuto la query
+			$consulta =$objetoAccesoDato->RetornarConsulta($myQuery);
+
+			$obj->BindQueryParams($consulta, $obj, $includePK);
+			$consulta->execute();
+
+			return $objetoAccesoDato->RetornarUltimoIdInsertado();	
+
+		}catch(Exception $e){
+			ErrorHelper::LogError(ErrorEnum::GenericInsert, $obj, $e);		 
+            throw new ErrorException("No se pudo insertar una entidad del tipo " . $entityName);
+		}
+	}
     
 }
