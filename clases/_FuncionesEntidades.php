@@ -55,7 +55,7 @@ class Funciones {
 
 	public static function InsertOne($obj, $includePK = false) {
 
-		try {  
+		//try {  
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 					 
 			//Obtengo el nombre de la clase y sus atributos
@@ -81,10 +81,10 @@ class Funciones {
 
 			return $objetoAccesoDato->RetornarUltimoIdInsertado();	
 
-		}catch(Exception $e){
+		/*}catch(Exception $e){
 			ErrorHelper::LogError(ErrorEnum::GenericInsert, $obj, $e);		 
             throw new ErrorException("No se pudo insertar una entidad del tipo " . $entityName);
-		}
+		}*/
 	}
     
 }
