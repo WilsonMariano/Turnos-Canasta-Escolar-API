@@ -1,8 +1,9 @@
 <?php
-require_once "helpers\PDOHelper.php";
-require_once "helpers\ErrorHelper.php";
-require_once "enums\ErrorEnum.php";
-foreach (glob("clases\*.php") as $filename)
+require_once __DIR__ . "/_AccesoDatos.php";
+require_once __DIR__ . "/helpers/PDOHelper.php";
+require_once __DIR__ . "/helpers/ErrorHelper.php";
+require_once __DIR__ . "/enums/ErrorEnum.php";
+foreach (glob(__DIR__ ."/clases/*.php") as $filename)
     require_once $filename;
     
 class Funciones {

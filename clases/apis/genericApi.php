@@ -5,11 +5,9 @@ require_once __DIR__ . '/../_FuncionesEntidades.php';
 class GenericApi{
 
 	public static function GetAll($request, $response, $args){
-		// echo "Hola";
-		//Traigo  todos los items
+
 		$apiParams = $request->getQueryParams();
 
-		// var_dump($apiParams);
 		$listado= Funciones::GetAll($apiParams["t"]);
 		
 		if($listado)
@@ -18,10 +16,9 @@ class GenericApi{
 			return $response->withJson(false, 400);
 	} 
 	
-	public static function GetPagedWithOptionalFilter($request, $response, $args){
-		$apiParams = $request->getQueryParams();
+	public static function GetPagedWithOptionalFilter($request, $response, $args) {
 
-		// var_dump($apiParams['entity']);
+		$apiParams = $request->getQueryParams();
 		
 		$e  = $apiParams['entity'];
 		$c1 = $apiParams['col1'] ?? null; 

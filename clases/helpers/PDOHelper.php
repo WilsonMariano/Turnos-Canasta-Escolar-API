@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "\BaseHelper.php";
+require_once __DIR__ . "/BaseHelper.php";
 
 class PDOHelper extends BaseHelper{
 

@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . "/_AccesoDatos.php";
 require_once __DIR__ . '/helpers/PDOHelper.php';
 
 class EmpresasDelegados {
