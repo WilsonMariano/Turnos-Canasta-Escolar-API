@@ -38,7 +38,7 @@ class SolicitudesApi{
         $puntoEntrega = $apiParams["puntoEntrega"];
         
         $cronograma = new Cronograma();
-        $cronograma->lugarEntrega = $puntoEntrega["id"];
+        $cronograma->idPuntoEntrega = $puntoEntrega["id"];
         $cronograma->idTitular = $idTitular;
         $cronograma->estado = "ESTADO_SOLICITUD_1";
 

@@ -46,5 +46,9 @@
         $this->get('/one[/]', \TitularesApi::class . ':GetOneByCuil');         
     });
 
+    $app->group('/cronograma', function () {
+        $this->get('/one[/]', \CronogramaApi::class . ':GetOneByCuitTitular');         
+    });
+
 
     $app->run();

@@ -11,9 +11,9 @@ class TitularesAPI {
         $listado = Titulares::GetByCuil($apiParams["cuil"]);
         
         if($listado)
-                return $response->withJson($listado, 200); 		
+                return $response->withJson(true, 200); 		
             else   
-                return $response->withJson(false, 400);
+                return $response->withJson(false, 200);
     }
     
 }

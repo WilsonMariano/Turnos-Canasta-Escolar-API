@@ -43,8 +43,9 @@ BEGIN
     create table Cronograma (
         id              int  unsigned auto_increment  primary key,
         idTitular       int         not null,
+        idPuntoEntrega  int         not null,
         fechaEntrega    date                ,
-        lugarEntrega    varchar(50) not null,
+        horaEntrega     time                ,
         estado          varchar(50) DEFAULT 'ESTADO_SOLICITUD_1' not null,
         observaciones   varchar(50) 
     );
@@ -99,10 +100,11 @@ BEGIN
     );
 
     insert into Diccionario(clave, valor) values
-    ("NIVEL_EDUCACION_1", "Preescolar"),
-    ("NIVEL_EDUCACION_2", "Primaria (1° a 3°)"),
-    ("NIVEL_EDUCACION_3", "Primaria (4° a 6°)"),
-    ("NIVEL_EDUCACION_4", "Secundaria"),
+    ("NIVEL_EDUCACION_1", "Sin estudios"),
+    ("NIVEL_EDUCACION_2", "Preescolar"),
+    ("NIVEL_EDUCACION_3", "Primaria (1° a 3°)"),
+    ("NIVEL_EDUCACION_4", "Primaria (4° a 6°)"),
+    ("NIVEL_EDUCACION_5", "Secundaria"),
     ("ESTADO_SOLICITUD_1", "Pendiente"),
     ("ESTADO_SOLICITUD_2", "Aprobado"),
     ("ESTADO_SOLICITUD_3", "Rechazado"),
