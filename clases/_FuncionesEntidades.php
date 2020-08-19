@@ -8,6 +8,10 @@ foreach (glob(__DIR__ ."/clases/*.php") as $filename)
     
 class Funciones {
 
+	public static function GetObjEntidad($entityName, $apiParamsBody = null){
+		return new $entityName($apiParamsBody);
+	}
+
     public static function GetAll($entityName) {    
 
         try {  
@@ -55,7 +59,7 @@ class Funciones {
 
 	public static function InsertOne($obj, $includePK = false) {
 
-		//try {  
+		try {  
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 					 
 			//Obtengo el nombre de la clase y sus atributos
@@ -81,10 +85,39 @@ class Funciones {
 
 			return $objetoAccesoDato->RetornarUltimoIdInsertado();	
 
-		/*}catch(Exception $e){
+		}catch(Exception $e){
 			ErrorHelper::LogError(ErrorEnum::GenericInsert, $obj, $e);		 
             throw new ErrorException("No se pudo insertar una entidad del tipo " . $entityName);
-		}*/
+		}
+	}
+
+	public static function UpdateOne($obj){
+		try {  
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		
+			//Obtengo el nombre de la clase y sus atributos
+			$entityName = get_class($obj);
+			$arrAtributos = get_class_vars($entityName);
+		
+			//Armo la query SQL dinamicamente
+			$myQuery = "update " . $entityName . " set ";
+			foreach ($arrAtributos as $atributo => $valor) {
+				if ($atributo != "id")
+					$myQuery .= $atributo . "=:" . $atributo . ",";
+			}
+			$myQuery = rtrim($myQuery,",")." where  id=:id ";
+		
+			//Ejecuto la query
+			$consulta =$objetoAccesoDato->RetornarConsulta($myQuery);
+			$obj->BindQueryParams($consulta,$obj);
+			$consulta->execute();
+		
+			return $consulta->rowCount() > 0 ? true : false;
+		
+		}catch(Exception $e){
+			ErrorHelper::LogError(ErrorEnum::GenericUpdate, $obj , $e);		 
+			throw new ErrorException("No se pudo actualizar una entidad del tipo " . $entityName);
+		}
 	}
     
 }

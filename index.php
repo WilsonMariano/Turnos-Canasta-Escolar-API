@@ -30,24 +30,25 @@
 
     //Generic
     $app->group('/generic', function () {
-          $this->get('/all[/]', \GenericApi::class . ':GetAll');  
-          $this->get('/paged[/]', \GenericApi::class . ':GetPagedWithOptionalFilter');         
+          $this->get('/all[/]',     \GenericApi::class . ':GetAll');  
+          $this->get('/paged[/]',   \GenericApi::class . ':GetPagedWithOptionalFilter');         
+          $this->put('/put[/]',     \GenericApi::class . ':UpdateOne');       
     });
 
     $app->group('/empresasDelegados', function () {
-		  $this->get('/one[/]', \EmpresasDelegadosApi::class . ':GetOneByCuit');         
+		  $this->get('/one[/]',     \EmpresasDelegadosApi::class . ':GetOneByCuit');         
     });
 
     $app->group('/solicitudes', function () {
-        $this->post('/insert[/]', \SolicitudesApi::class . ':Insert');         
+        $this->post('/insert[/]',   \SolicitudesApi::class . ':Insert');         
     });
 
     $app->group('/titulares', function () {
-        $this->get('/one[/]', \TitularesApi::class . ':GetOneByCuil');         
+        $this->get('/one[/]',       \TitularesApi::class . ':GetOneByCuil');         
     });
 
     $app->group('/cronograma', function () {
-        $this->get('/one[/]', \CronogramaApi::class . ':GetOneByCuitTitular');         
+        $this->get('/one[/]',       \CronogramaApi::class . ':GetOneByCuitTitular');        
     });
 
 

@@ -10,6 +10,7 @@ BEGIN
 	drop table if exists LugaresEntrega;
 	drop table if exists EmpresasDelegados;
 	drop table if exists Diccionario;
+    drop table if exists Usuarios;
 	
 	
 	create table Titulares (
@@ -21,11 +22,11 @@ BEGIN
 		domicilio       varchar(50) not null,
 		localidad       varchar(50) not null,
 		cuitEmpresa     bigint      not null,
-		razonSocialEmpresa     varchar(50)         ,
+		razonSocialEmpresa     varchar(50)  ,
 		telefono        int                 ,
 		celular         int         not null,
 		email           varchar(50) not null,
-        fechaAlta       date        
+        fechaAlta       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP     
 	);
 
     create table Familiares (
@@ -57,6 +58,7 @@ BEGIN
         horario         varchar(50) not null,
         lnglat          varchar(50) not null
     );
+    
 
     insert into LugaresEntrega(nombre, domicilio, horario, lnglat) values
     ("Sincato Adrogué", "Av. Espora 953, Adrogué", "09:00 a 16:00 hs", "-58.388479, -34.801165"),
@@ -110,8 +112,15 @@ BEGIN
     ("ESTADO_SOLICITUD_3", "Rechazado"),
     ("ESTADO_SOLICITUD_4", "Entregado");
 
+    create table Usuarios (
+        id              int  unsigned auto_increment  primary key,
+        email           varchar(50) not null,
+        password        varchar(50) not null
+    );
 
-	
+    insert into Usuarios(email, password) values
+    ("mgw009@gmail.com", "asd123");
+
 
 END$$
 

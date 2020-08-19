@@ -35,4 +35,22 @@ class GenericApi{
 		else
 			return $response->withJson(false, 400);  
 	} 
+
+	public static function UpdateOne($request, $response, $args) {
+		//Datos recibidos por QueryString y Body
+		$apiParamsQS = $request->getQueryParams();
+		$apiParamsBody = $request->getParsedBody();	
+
+		// Obtengo instancia de clase correspondiente.
+		$objEntidad = Funciones::GetObjEntidad($apiParamsQS['t'], $apiParamsBody);
+
+		if($objEntidad)
+			if(Funciones::UpdateOne($objEntidad))
+				return $response->withJson(true, 200); 
+			else
+				return $response->withJson(false, 500);  			
+		else
+			return $response->withJson(false, 400);  			
+					
+	}
 }

@@ -10,6 +10,17 @@ class Cronograma {
     public $estado;
     public $observaciones;
 
+    public function __construct($arrData = null){
+		if($arrData != null){
+            $this->id               = $arrData["id"] ?? null;
+			$this->idTitular        = $arrData["idTitular"];
+            $this->idPuntoEntrega   = $arrData["idPuntoEntrega"];
+            $this->fechaEntrega     = $arrData["fechaEntrega"];
+            $this->horaEntrega      = $arrData["horaEntrega"];
+            $this->estado           = $arrData["estado"];
+            $this->observaciones    = $arrData["observaciones"];
+		}
+	}
 
     
     public function BindQueryParams($consulta, $objEntidad, $includePK = true){
