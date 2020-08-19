@@ -51,5 +51,9 @@
         $this->get('/one[/]',       \CronogramaApi::class . ':GetOneByCuitTitular');        
     });
 
+	$app->group('/usuarios', function () {
+		$this->post('/login[/]',    \UsuarioApi::class . ':Login');      
+	});
+
 
     $app->run();
