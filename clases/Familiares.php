@@ -39,4 +39,27 @@ class Familiares {
         $consulta->bindValue(':nivelEducacion'    ,$objEntidad->nivelEducacion  ,\PDO::PARAM_STR);
         $consulta->bindValue(':sexo'              ,$objEntidad->sexo            ,\PDO::PARAM_STR);
     }
+
+    public static function GetAllByIdTitular($idTitular) {
+		
+        try{
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			
+            $consulta = $objetoAccesoDato->RetornarConsulta("
+                SELECT FA.*, DI.clave as 'codNivelEducacion', DI.valor as 'nivelEducacion' 
+                FROM Familiares FA
+                INNER JOIN Diccionario DI ON DI.clave = FA.nivelEducacion 
+                WHERE FA.idTitular = :idTitular
+            ");
+			$consulta->bindValue(':idTitular' , $idTitular, \PDO::PARAM_INT);		
+			$consulta->execute();
+			$objEntidad= PDOHelper::FetchAll($consulta, static::class);
+
+			return $objEntidad;
+
+		} catch(Exception $e){
+			ErrorHelper::LogError(__FUNCTION__, $cuit, $e);		 
+			throw new ErrorException("No se pudo recuperar el titular " . $cuit);
+		}
+    }
 }

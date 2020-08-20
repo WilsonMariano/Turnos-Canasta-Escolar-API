@@ -15,6 +15,18 @@ class GenericApi{
 		else   
 			return $response->withJson(false, 400);
 	} 
+
+	public static function GetOne($request, $response, $args){
+		$apiParams = $request->getQueryParams();
+		$id = json_decode($args['id']);
+		
+		$obj= Funciones::GetOne($id, $apiParams["t"]);
+		
+		if($obj)
+			return $response->withJson($obj, 200); 
+		else
+			return $response->withJson(false, 400);  
+	} 
 	
 	public static function GetPagedWithOptionalFilter($request, $response, $args) {
 

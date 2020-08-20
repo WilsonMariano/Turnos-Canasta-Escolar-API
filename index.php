@@ -30,9 +30,10 @@
 
     //Generic
     $app->group('/generic', function () {
-          $this->get('/all[/]',     \GenericApi::class . ':GetAll');  
-          $this->get('/paged[/]',   \GenericApi::class . ':GetPagedWithOptionalFilter');         
-          $this->put('/put[/]',     \GenericApi::class . ':UpdateOne');       
+        $this->get('/one/{id}',     \GenericApi::class . ':GetOne');    
+        $this->get('/all[/]',       \GenericApi::class . ':GetAll');  
+        $this->get('/paged[/]',     \GenericApi::class . ':GetPagedWithOptionalFilter');         
+        $this->put('/put[/]',       \GenericApi::class . ':UpdateOne');       
     });
 
     $app->group('/empresasDelegados', function () {
@@ -47,6 +48,10 @@
         $this->get('/one[/]',       \TitularesApi::class . ':GetOneByCuil');         
     });
 
+    $app->group('/familiares', function () {
+		$this->get('/all[/]',       \FamiliaresApi::class . ':GetAllByIdTitular');      
+    });
+    
     $app->group('/cronograma', function () {
         $this->get('/one[/]',       \CronogramaApi::class . ':GetOneByCuitTitular');        
     });
