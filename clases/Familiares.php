@@ -42,7 +42,7 @@ class Familiares {
 
     public static function GetAllByIdTitular($idTitular) {
 		
-        try{
+        //try{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			
             $consulta = $objetoAccesoDato->RetornarConsulta("
@@ -57,9 +57,9 @@ class Familiares {
 
 			return $objEntidad;
 
-		} catch(Exception $e){
+		/*} catch(Exception $e){
 			ErrorHelper::LogError(__FUNCTION__, $cuit, $e);		 
 			throw new ErrorException("No se pudo recuperar el titular " . $cuit);
-		}
+		}*/
     }
 }

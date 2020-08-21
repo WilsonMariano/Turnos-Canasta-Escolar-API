@@ -1,10 +1,14 @@
 <?php
 require_once __DIR__ . "/_AccesoDatos.php";
 require_once __DIR__ . "/helpers/PDOHelper.php";
-require_once __DIR__ . "/helpers/ErrorHelper.php";
-require_once __DIR__ . "/enums/ErrorEnum.php";
-foreach (glob(__DIR__ ."/clases/*.php") as $filename)
-    require_once $filename;
+
+require_once __DIR__ . "/Cronograma.php";
+require_once __DIR__ . "/Diccionario.php";
+require_once __DIR__ . "/EmpresasDelegados.php";
+require_once __DIR__ . "/Familiares.php";
+require_once __DIR__ . "/LugaresEntrega.php";
+require_once __DIR__ . "/Titulares.php";
+require_once __DIR__ . "/Usuarios.php";
     
 class Funciones {
 
@@ -14,7 +18,7 @@ class Funciones {
 
     public static function GetAll($entityName) {    
 
-        try {  
+        //try {  
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
             $consulta =$objetoAccesoDato->RetornarConsulta('select * from ' .$entityName);
             $consulta->execute();	
@@ -22,15 +26,15 @@ class Funciones {
             
             return $arrObjEntidad;
     
-        }catch(Exception $e){
+        /*}catch(Exception $e){
             ErrorHelper::LogError(ErrorEnum::GenericGet, $obj , $e);		 
             throw new ErrorException("No se pudieron recuperar entidades del tipo " . $entityName);
-        }
+        }*/
     }
 
     public static function GetPagedWithOptionalFilter($entityName, $column1, $text1, $column2, $text2, $rows, $page){
 
-		try {  
+		//try {  
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 
 			$consulta =$objetoAccesoDato->RetornarConsulta("call spGetPagedWithOptionalFilter('$entityName', '$column1', 
@@ -51,15 +55,15 @@ class Funciones {
 			
 			return $result;	
 
-		}catch(Exception $e){
+		/*}catch(Exception $e){
 			ErrorHelper::LogError(__FUNCTION__, $obj , $e);		 
 			throw new ErrorException("No se pudieron recuperar entidades del tipo " . $entityName);
-		}
+		}*/
 	}
 
 	public static function InsertOne($obj, $includePK = false) {
 
-		try {  
+		//try {  
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 					 
 			//Obtengo el nombre de la clase y sus atributos
@@ -85,14 +89,14 @@ class Funciones {
 
 			return $objetoAccesoDato->RetornarUltimoIdInsertado();	
 
-		}catch(Exception $e){
+		/*}catch(Exception $e){
 			ErrorHelper::LogError(ErrorEnum::GenericInsert, $obj, $e);		 
             throw new ErrorException("No se pudo insertar una entidad del tipo " . $entityName);
-		}
+		}*/
 	}
 
 	public static function UpdateOne($obj){
-		try {  
+		//try {  
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 		
 			//Obtengo el nombre de la clase y sus atributos
@@ -114,14 +118,14 @@ class Funciones {
 		
 			return $consulta->rowCount() > 0 ? true : false;
 		
-		}catch(Exception $e){
+		/*}catch(Exception $e){
 			ErrorHelper::LogError(ErrorEnum::GenericUpdate, $obj , $e);		 
 			throw new ErrorException("No se pudo actualizar una entidad del tipo " . $entityName);
-		}
+		}*/
 	}
 
 	public static function GetOne($idParametro, $entityName){	
-		try {  
+		//try {  
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 		
 			$consulta =$objetoAccesoDato->RetornarConsulta("select * from " . $entityName . " where id =:id");
@@ -131,10 +135,10 @@ class Funciones {
 			$obj = PDOHelper::FetchObject($consulta, $entityName);
 			return $obj;	
 
-		}catch(Exception $e){
+		/*}catch(Exception $e){
 			ErrorHelper::LogError(ErrorEnum::GenericGetOne, $obj , $e);		 
 			throw new ErrorException("No se pudo obtener una entidad del tipo " . $entityName);
-		}
+		}*/
 	}	 
     
 }

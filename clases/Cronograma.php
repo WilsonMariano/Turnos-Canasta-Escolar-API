@@ -36,7 +36,7 @@ class Cronograma {
     }
 
     public static function GetByCuilTitular($cuil) {
-        try{
+        //try{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			
             $consulta = $objetoAccesoDato->RetornarConsulta("
@@ -56,9 +56,9 @@ class Cronograma {
 
 			return $objEntidad;
 
-		} catch(Exception $e){
+		/*} catch(Exception $e){
 			ErrorHelper::LogError(__FUNCTION__, $cuit, $e);		 
 			throw new ErrorException("No se pudo recuperar el titular " . $cuit);
-		}
+		}*/
     }
 }

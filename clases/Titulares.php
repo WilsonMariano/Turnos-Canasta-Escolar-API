@@ -51,7 +51,7 @@ class Titulares {
 
     public static function GetByCuil($cuil) {
 		
-        try{
+        //try{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			
 			$consulta = $objetoAccesoDato->RetornarConsulta("select * from Titulares where cuil = :cuil");
@@ -61,9 +61,9 @@ class Titulares {
 
 			return $objEntidad;
 
-		} catch(Exception $e){
+		/*} catch(Exception $e){
 			ErrorHelper::LogError(__FUNCTION__, $cuit, $e);		 
 			throw new ErrorException("No se pudo recuperar el titular " . $cuit);
-		}
+		}*/
     }
 }

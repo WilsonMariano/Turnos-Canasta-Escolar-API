@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/_AccesoDatos.php";
+//require_once __DIR__ . '/helpers/ErrorHelper.php';
 require_once __DIR__ . '/helpers/PDOHelper.php';
 
 
@@ -11,7 +12,7 @@ class Usuarios {
     public $password;
 
     public static function Login($usuario) {
-		try{
+		//try{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta("select * from " . static::class .
 				" where email = :email AND password = :password");
@@ -23,9 +24,9 @@ class Usuarios {
 
 			return $usuarioBuscado;
 		
-		} catch(Exception $e){
+		/*} catch(Exception $e){
 			ErrorHelper::LogError(__FUNCTION__, $usuario, $e);		 
 			throw new ErrorException("No se pudo iniciar sesión");
-		}
+		}*/
 	}
 }

@@ -11,7 +11,7 @@ class EmpresasDelegados {
 
     public static function GetByCuit($cuit) {
 
-        try{
+       // try{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			
 			$consulta = $objetoAccesoDato->RetornarConsulta("select * from EmpresasDelegados where cuit = :cuit");
@@ -21,9 +21,9 @@ class EmpresasDelegados {
 
 			return $objEntidad;
 
-		} catch(Exception $e){
+	/*	} catch(Exception $e){
 			ErrorHelper::LogError(__FUNCTION__, $cuit, $e);		 
 			throw new ErrorException("No se pudo recuperar la empresa " . $cuit);
-		}
+		}*/
     }
 }

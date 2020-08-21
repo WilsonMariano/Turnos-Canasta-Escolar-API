@@ -2,14 +2,19 @@
 
     use \Psr\Http\Message\ServerRequestInterface as Request;
     use \Psr\Http\Message\ResponseInterface as Response;
-    require 'vendor/autoload.php';
+
+    require __DIR__ . '/vendor/autoload.php';
+
+    require_once __DIR__ . '/clases/apis/cronogramaApi.php';
+    require_once __DIR__ . '/clases/apis/empresasDelegadosApi.php';
+    require_once __DIR__ . '/clases/apis/familiaresApi.php';
+    require_once __DIR__ . '/clases/apis/genericApi.php';
+    require_once __DIR__ . '/clases/apis/solicitudesApi.php';
+    require_once __DIR__ . '/clases/apis/titularesApi.php';
+    require_once __DIR__ . '/clases/apis/usuarioApi.php';
 
     require_once __DIR__ . '/clases/middlewares/jwtAuth.php';
 
-    //Incluir todas las apis creadas
-    foreach (glob("clases/apis/*.php") as $filename){
-        require_once $filename;
-    }
 
     $config['displayErrorDetails'] = true;
     $config['addContentLengthHeader'] = false;
@@ -19,7 +24,7 @@
     $app->add(function ($req, $res, $next){
 		$response = $next($req, $res);
 		return $response
-		->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200')
+		->withHeader('Access-Control-Allow-Origin', '*')
 		->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
 		->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     });
