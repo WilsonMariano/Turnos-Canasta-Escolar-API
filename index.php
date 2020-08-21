@@ -4,6 +4,8 @@
     use \Psr\Http\Message\ResponseInterface as Response;
     require 'vendor/autoload.php';
 
+    require_once __DIR__ . '/clases/middlewares/jwtAuth.php';
+
     //Incluir todas las apis creadas
     foreach (glob("clases/apis/*.php") as $filename){
         require_once $filename;
@@ -33,7 +35,7 @@
         $this->get('/one/{id}',     \GenericApi::class . ':GetOne');    
         $this->get('/all[/]',       \GenericApi::class . ':GetAll');  
         $this->get('/paged[/]',     \GenericApi::class . ':GetPagedWithOptionalFilter');         
-        $this->put('/put[/]',       \GenericApi::class . ':UpdateOne');       
+        $this->put('/put[/]',       \GenericApi::class . ':UpdateOne')->add(\JWTAuth::class . ':VerificarUsuario');;       
     });
 
     $app->group('/empresasDelegados', function () {
