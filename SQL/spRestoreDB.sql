@@ -62,9 +62,9 @@ BEGIN
 
     insert into LugaresEntrega(nombre, domicilio, horario, lnglat) values
     ("Sindicato Adrogué", "Av. Espora 953, Adrogué", "09:00 a 16:00 hs", "-58.388479, -34.801165"),
-    ("Campo Deportivo Burzaco", "Pino 2085, Burzaco", "09:00 a 16:00 hs", "-58.420550, -34.822067"),
-    ("Filial Guernica", "Calle 101 N° 49, Guernica", "09:00 a 16:00 hs", "-58.382249, -34.915978"),
-    ("Filial San Vicente", "Belgrano 305, San Vicente", "09:00 a 16:00 hs", "-58.420288, -35.025269");
+    ("Campo Deportivo Burzaco", "Pino 1995, Burzaco", "09:00 a 16:00 hs", "-58.420550, -34.822067"),
+    ("Filial Guernica", "Calle 101 N° 41, Guernica", "09:00 a 16:00 hs", "-58.382249, -34.915978"),
+    ("Filial San Vicente", "Belgrano 309, San Vicente", "09:00 a 16:00 hs", "-58.420288, -35.025269");
 
 
     create table EmpresasDelegados (
