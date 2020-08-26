@@ -48,7 +48,7 @@ BEGIN
         fechaEntrega    date                ,
         horaEntrega     time                ,
         estado          varchar(50) DEFAULT 'ESTADO_SOLICITUD_1' not null,
-        observaciones   varchar(50) 
+        observaciones   varchar(300) 
     );
 
     create table LugaresEntrega (
