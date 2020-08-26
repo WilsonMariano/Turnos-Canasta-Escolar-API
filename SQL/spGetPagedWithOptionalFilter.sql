@@ -24,7 +24,7 @@ BEGIN
 	set max_sp_recursion_depth=255;
 	drop table if exists my_temp;
 	
-	set @sql = CONCAT( "create temporary table my_temp SELECT * FROM ", view_name );
+	set @sql = CONCAT( "create temporary table my_temp SELECT * FROM ", view_name);
 	
 	IF  column_1 is not null and length(column_1) > 1 THEN 
 		set @final_text_1 = CONCAT ( "%", text_to_find_1, "%" );
@@ -36,7 +36,7 @@ BEGIN
     END IF;
 	
 	-- cierro la query con  ";"
-	set @sql = CONCAT (@sql, ";");
+	set @sql = CONCAT (@sql, " ORDER BY id DESC;");
 	
 	-- ejecuto la query , se crea tabla temporal
 	prepare stmt1 FROM @sql;
