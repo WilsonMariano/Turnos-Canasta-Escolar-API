@@ -9,7 +9,9 @@ class Usuarios {
 
 	public $id;
 	public $email;
-    public $password;
+	public $password;
+	public $role;
+	public $idPuntoEntrega;
 
     public static function Login($usuario) {
 		//try{

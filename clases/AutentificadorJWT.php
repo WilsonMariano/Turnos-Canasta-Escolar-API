@@ -15,11 +15,12 @@ class AutentificadorJWT
         	'iat'=>$ahora,
             'exp' => $ahora + 86400,
             'aud' => self::Aud(),
-            'data' => 
-				    [
+            'data' => [
 				    	"id" => $usuario->id,
-				    	"email" => $usuario->email
-                    ]
+                        "email" => $usuario->email,
+                        "role" => $usuario->role,
+                        "idPuntoEntrega" => $usuario->idPuntoEntrega
+                        ]
         );
      
         return JWT::encode($payload, self::$claveSecreta);

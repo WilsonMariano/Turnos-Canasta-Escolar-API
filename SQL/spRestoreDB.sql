@@ -115,11 +115,17 @@ BEGIN
     create table Usuarios (
         id              int  unsigned auto_increment  primary key,
         email           varchar(50) not null,
-        password        varchar(50) not null
+        password        varchar(50) not null,
+        role            varchar(20) not null,
+        idPuntoEntrega  varchar(3)
     );
 
-    insert into Usuarios(email, password) values
-    ("mgw009@gmail.com", "asd123");
+    insert into Usuarios(email, password, role, idPuntoEntrega) values
+    ("admin@admin", "asd123", "admin", ""),
+    ("usuario@sindicato", "@Sindicato2020", "usuario", "1"),
+    ("usuario@campodeportivo", "@CampoDeportivo2020", "usuario", "2"),
+    ("usuario@guernica", "@FilialGuernica2020", "usuario", "3"),
+    ("usuario@sanvicente", "@SanVicente2020", "usuario", "4");
 
 
 END$$
