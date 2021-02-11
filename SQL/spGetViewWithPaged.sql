@@ -1,5 +1,5 @@
 DELIMITER $$
-DROP PROCEDURE IF EXISTS spGetViewWithPaged$$
+-- DROP PROCEDURE IF EXISTS spGetViewWithPaged$$
 CREATE PROCEDURE spGetViewWithPaged(
 	in view_name varchar(80),
 	in rows_quantity int,

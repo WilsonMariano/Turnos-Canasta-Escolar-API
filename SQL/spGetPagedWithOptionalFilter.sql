@@ -1,5 +1,5 @@
 DELIMITER $$
-DROP PROCEDURE IF EXISTS spGetPagedWithOptionalFilter$$
+-- DROP PROCEDURE IF EXISTS spGetPagedWithOptionalFilter$$
 CREATE PROCEDURE spGetPagedWithOptionalFilter(
 	/*
 		@view_name		:	Nombre de la tabla o vista a consultar. 

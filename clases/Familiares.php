@@ -15,7 +15,7 @@ class Familiares {
     public function __construct($arrData = null){
 		if($arrData != null){
             $this->id               = $arrData["id"] ?? null;
-			$this->idTitular        = $arrData["idTitular"];
+			$this->idTitular        = $arrData["idTitular"] ?? null;
             $this->dni              = $arrData["dni"];
             $this->nombre           = $arrData["nombre"];
             $this->apellido         = $arrData["apellido"];

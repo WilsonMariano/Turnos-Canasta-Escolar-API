@@ -1,6 +1,6 @@
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS createViews$$
+-- DROP PROCEDURE IF EXISTS createViews$$
 CREATE PROCEDURE createViews()
 BEGIN
 	
