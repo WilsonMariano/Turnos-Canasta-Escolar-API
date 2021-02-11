@@ -107,6 +107,7 @@ BEGIN
     ("NIVEL_EDUCACION_3", "Primaria (1° a 3°)"),
     ("NIVEL_EDUCACION_4", "Primaria (4° a 6°)"),
     ("NIVEL_EDUCACION_5", "Secundaria"),
+    ("NIVEL_EDUCACION_6", "Universitaria"),
     ("ESTADO_SOLICITUD_1", "Pendiente"),
     ("ESTADO_SOLICITUD_2", "Aprobado"),
     ("ESTADO_SOLICITUD_3", "Rechazado"),
