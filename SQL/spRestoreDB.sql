@@ -30,15 +30,17 @@ BEGIN
 	);
 
     create table Familiares (
-        id              int  unsigned auto_increment  primary key,
-        idTitular       int         not null,
-        dni             int         not null,
-        nombre          varchar(50) not null,
-        apellido        varchar(50) not null,
-        fechaNacimiento date        not null,
-        edad            int         not null,
-        nivelEducacion  varchar(50)         ,
-        sexo            char        not null
+        id                  int  unsigned auto_increment  primary key,
+        idTitular           int         not null,
+        dni                 int         not null,
+        nombre              varchar(50) not null,
+        apellido            varchar(50) not null,
+        fechaNacimiento     date        not null,
+        edad                int         not null,
+        nivelEducacion      varchar(50)         ,
+        usaGuardapolvo      bit         not null,
+        talleGuardapolvo    varchar(50)         ,
+        sexo                char        not null
     );
 
     create table Cronograma (
@@ -73,27 +75,27 @@ BEGIN
         razonSocial     varchar(50)  not null
     );
     
-    insert into EmpresasDelegados(cuit, razonSocial) values 
-    (30550273558, "OSECAC"),
-    (30549493196, "SECAB"),
-    (30687310434, "CARREFOUR "),
-    (30710376456, "AGLOLAM"),
-    (30612865333, "MAYCAR"),
-    (30663005843, "MAXICONSUMO"),
-    (30710589018, "TREOLAND"),
-    (30678138300, "WALMART"),
-    (30708772964, "JUMBO"),
-    (30576344321, "CARPAS DANGIOLA"),
-    (30685849751, "DIA ARGENTINA"),
-    (30541222800, "RICARDO OSPITAL"),
-    (30683009195, "DISTRIBUIDORA PLACASUR"),
-    (30707270159, "HENDEL HOGAR"),
-    (30691054833, "APRESA"),
-    (30710532180, "MEDAMAX"),
-    (30655725829, "SODIMAC"),
-    (33708103409, "YMK"),
-    (30590360763, "DISCO"),
-    (20218720855, "MAXICERAMICOS");
+    -- insert into EmpresasDelegados(cuit, razonSocial) values 
+    -- (30550273558, "OSECAC"),
+    -- (30549493196, "SECAB"),
+    -- (30687310434, "CARREFOUR "),
+    -- (30710376456, "AGLOLAM"),
+    -- (30612865333, "MAYCAR"),
+    -- (30663005843, "MAXICONSUMO"),
+    -- (30710589018, "TREOLAND"),
+    -- (30678138300, "WALMART"),
+    -- (30708772964, "JUMBO"),
+    -- (30576344321, "CARPAS DANGIOLA"),
+    -- (30685849751, "DIA ARGENTINA"),
+    -- (30541222800, "RICARDO OSPITAL"),
+    -- (30683009195, "DISTRIBUIDORA PLACASUR"),
+    -- (30707270159, "HENDEL HOGAR"),
+    -- (30691054833, "APRESA"),
+    -- (30710532180, "MEDAMAX"),
+    -- (30655725829, "SODIMAC"),
+    -- (33708103409, "YMK"),
+    -- (30590360763, "DISCO"),
+    -- (20218720855, "MAXICERAMICOS");
 
     create table Diccionario (
         id              int  unsigned auto_increment  primary key,
@@ -102,7 +104,7 @@ BEGIN
     );
 
     insert into Diccionario(clave, valor) values
-    ("NIVEL_EDUCACION_1", "Sin estudios"),
+    -- ("NIVEL_EDUCACION_1", "Sin estudios"),
     ("NIVEL_EDUCACION_2", "Preescolar"),
     ("NIVEL_EDUCACION_3", "Primaria (1° a 3°)"),
     ("NIVEL_EDUCACION_4", "Primaria (4° a 6°)"),
@@ -111,7 +113,13 @@ BEGIN
     ("ESTADO_SOLICITUD_1", "Pendiente"),
     ("ESTADO_SOLICITUD_2", "Aprobado"),
     ("ESTADO_SOLICITUD_3", "Rechazado"),
-    ("ESTADO_SOLICITUD_4", "Entregado");
+    ("ESTADO_SOLICITUD_4", "Entregado"),
+    ("TALLE_GUARDAPOLVO_1", "6"),
+    ("TALLE_GUARDAPOLVO_2", "8"),
+    ("TALLE_GUARDAPOLVO_3", "10"),
+    ("TALLE_GUARDAPOLVO_4", "12"),
+    ("TALLE_GUARDAPOLVO_5", "14"),
+    ("TALLE_GUARDAPOLVO_6", "16");
 
     create table Usuarios (
         id              int  unsigned auto_increment  primary key,
