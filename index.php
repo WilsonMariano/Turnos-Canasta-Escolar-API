@@ -61,6 +61,7 @@
     
     $app->group('/cronograma', function () {
         $this->get('/one[/]',       \CronogramaApi::class . ':GetOneByCuitTitular');        
+        $this->get('/all-by-fecha[/]',       \CronogramaApi::class . ':GetAllByFechaAndPuntoEntrega');        
     });
 
 	$app->group('/usuarios', function () {
