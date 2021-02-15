@@ -22,7 +22,7 @@ class CronogramaApi {
         $apiParams = $request->getQueryParams();
         $fechaDesde = $apiParams['fechaDesde'];
         $fechaHasta = $apiParams['fechaHasta'];
-        $idPuntoEntrega = $apiParams['idPuntoEntrega'];
+        $idPuntoEntrega = $apiParams['idPuntoEntrega'] ?? null;
 
         $cronograma = Cronograma::GetAllByFechaAndPuntoEntrega($fechaDesde, $fechaHasta, $idPuntoEntrega); 
 

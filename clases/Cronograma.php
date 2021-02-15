@@ -64,47 +64,51 @@ class Cronograma {
 
     public static function GetAllByFechaAndPuntoEntrega($fechaDesde, $fechaHasta, $idPuntoEntrega) {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			
-            $consulta = $objetoAccesoDato->RetornarConsulta("
-            SELECT
-                cr.fechaEntrega 'Fecha entrega',
-                cr.horaEntrega 'Hora entrega',
-                ti.numAfiliado 'Afiliado',
-                ti. apellido 'Apellido',
-                ti.nombre 'Nombre',
-                ti.cuil 'CUIL',
-                ti.celular 'Celular',
-                ti.razonSocialEmpresa 'Empresa',
-                fa.apellido 'Apeliido hijo',
-                fa.nombre 'Nombre',
-                fa.sexo 'Sexo',
-                fa.edad 'Edad',
-                de.valor 'Nivel',
-                CASE fa.usaGuardapolvo
-                WHEN true THEN 'Si'
-                WHEN false THEN 'No'
-                END AS 'Guardapolvo',
-                dt.valor 'Talle',
-                le.nombre 'Punto entrega',
-                ds.valor 'Estado'
-            FROM cronograma cr
-            JOIN titulares ti 		ON ti.id = cr.idTitular
-            JOIN familiares fa 		ON fa.idTitular = cr.idTitular
-            JOIN lugaresentrega le	ON le.id = cr.idPuntoEntrega
-            JOIN diccionario ds 	ON ds.clave = cr.estado
-            JOIN diccionario de 	ON de.clave = fa.nivelEducacion
-            JOIN diccionario dt 	ON dt.clave = fa.talleGuardapolvo
-            WHERE cr.fechaEntrega BETWEEN :fechaDesde AND :fechaHasta
-            AND cr.idPuntoEntrega = :idPuntoEntrega
-            ");
-			$consulta->bindValue(':fechaDesde' , $fechaDesde, \PDO::PARAM_STR);	
-            $consulta->bindValue(':fechaHasta' , $fechaHasta, \PDO::PARAM_STR);	
-            $consulta->bindValue(':idPuntoEntrega' , $idPuntoEntrega, \PDO::PARAM_INT);	
-			$consulta->execute();
 
-			$rows = PDOHelper::FetchAll($consulta);
+        $query = "
+        SELECT
+            cr.fechaEntrega 'Fecha entrega',
+            cr.horaEntrega 'Hora entrega',
+            ti.numAfiliado 'Afiliado',
+            ti. apellido 'Apellido',
+            ti.nombre 'Nombre',
+            ti.cuil 'CUIL',
+            ti.celular 'Celular',
+            ti.razonSocialEmpresa 'Empresa',
+            fa.apellido 'Apeliido hijo',
+            fa.nombre 'Nombre',
+            fa.sexo 'Sexo',
+            fa.edad 'Edad',
+            de.valor 'Nivel',
+            CASE fa.usaGuardapolvo
+            WHEN true THEN 'Si'
+            WHEN false THEN 'No'
+            END AS 'Guardapolvo',
+            dt.valor 'Talle',
+            le.nombre 'Punto entrega',
+            ds.valor 'Estado'
+        FROM cronograma cr
+        JOIN titulares ti 		ON ti.id = cr.idTitular
+        JOIN familiares fa 		ON fa.idTitular = cr.idTitular
+        JOIN lugaresentrega le	ON le.id = cr.idPuntoEntrega
+        JOIN diccionario ds 	ON ds.clave = cr.estado
+        JOIN diccionario de 	ON de.clave = fa.nivelEducacion
+        JOIN diccionario dt 	ON dt.clave = fa.talleGuardapolvo
+        WHERE cr.fechaEntrega BETWEEN :fechaDesde AND :fechaHasta";
 
-			return $rows;
+        !is_null($idPuntoEntrega) 
+            ? $query .= " AND cr.idPuntoEntrega = :idPuntoEntrega"
+            : null;
+
+        $consulta = $objetoAccesoDato->RetornarConsulta($query);
+        $consulta->bindValue(':fechaDesde' , $fechaDesde, \PDO::PARAM_STR);	
+        $consulta->bindValue(':fechaHasta' , $fechaHasta, \PDO::PARAM_STR);	
+        !is_null($idPuntoEntrega) ? $consulta->bindValue(':idPuntoEntrega' , $idPuntoEntrega, \PDO::PARAM_INT) : null;	
+        $consulta->execute();
+
+        $rows = PDOHelper::FetchAll($consulta);
+
+        return $rows;
 
     }
 }
