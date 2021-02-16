@@ -4,11 +4,11 @@ require_once __DIR__ . '/../Familiares.php';
 
 class FamiliaresApi {
 
-    public static function GetAllByIdTitular($request, $response, $args) {
+    public static function GetAllByIdTitularFormatter($request, $response, $args) {
 
         $apiParams = $request->getQueryParams();
 
-        $listado = Familiares::GetAllByIdTitular($apiParams["idTitular"]);
+        $listado = Familiares::GetAllByIdTitularFormatter($apiParams["idTitular"]);
         
         if($listado)
                 return $response->withJson($listado, 200); 		

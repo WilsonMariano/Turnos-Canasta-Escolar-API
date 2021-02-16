@@ -46,7 +46,7 @@ class Familiares {
         $consulta->bindValue(':sexo'              ,$objEntidad->sexo                ,\PDO::PARAM_STR);
     }
 
-    public static function GetAllByIdTitular($idTitular) {
+    public static function GetAllByIdTitularFormatter($idTitular) {
 		
         //try{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
@@ -64,7 +64,7 @@ class Familiares {
             ");
 			$consulta->bindValue(':idTitular' , $idTitular, \PDO::PARAM_INT);		
 			$consulta->execute();
-			$objEntidad= PDOHelper::FetchAll($consulta, static::class);
+			$objEntidad = PDOHelper::FetchAll($consulta, static::class);
 
 			return $objEntidad;
 
@@ -72,5 +72,18 @@ class Familiares {
 			ErrorHelper::LogError(__FUNCTION__, $cuit, $e);		 
 			throw new ErrorException("No se pudo recuperar el titular " . $cuit);
 		}*/
+    }
+
+    public static function GetAllByIdTitular($idTitular) {	
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+        $consulta = $objetoAccesoDato->RetornarConsulta("
+            SELECT *
+            FROM Familiares
+            WHERE idTitular = :idTitular
+        ");
+        $consulta->bindValue(':idTitular' , $idTitular, \PDO::PARAM_INT);		
+        $consulta->execute();
+        $objEntidad = PDOHelper::FetchAll($consulta, static::class);
+        return $objEntidad;
     }
 }

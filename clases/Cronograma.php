@@ -52,7 +52,7 @@ class Cronograma {
             ");
 			$consulta->bindValue(':cuil' , $cuil, \PDO::PARAM_INT);		
 			$consulta->execute();
-			$objEntidad= PDOHelper::FetchObject($consulta, static::class);
+			$objEntidad = PDOHelper::FetchObject($consulta, static::class);
 
 			return $objEntidad;
 
@@ -60,6 +60,19 @@ class Cronograma {
 			ErrorHelper::LogError(__FUNCTION__, $cuit, $e);		 
 			throw new ErrorException("No se pudo recuperar el titular " . $cuit);
 		}*/
+    }
+
+    public static function GetByIdTitular($idTitular) {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+            $consulta = $objetoAccesoDato->RetornarConsulta("
+                SELECT *
+                FROM cronograma
+                WHERE idTitular = :idTitular
+            ");
+			$consulta->bindValue(':idTitular' , $idTitular, \PDO::PARAM_INT);		
+			$consulta->execute();
+			$objEntidad = PDOHelper::FetchObject($consulta, static::class);
+			return $objEntidad;
     }
 
     public static function GetAllByFechaAndPuntoEntrega($fechaDesde, $fechaHasta, $idPuntoEntrega) {

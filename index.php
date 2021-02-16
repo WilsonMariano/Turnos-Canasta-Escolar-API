@@ -48,7 +48,9 @@
     });
 
     $app->group('/solicitudes', function () {
-        $this->post('/insert[/]',   \SolicitudesApi::class . ':Insert');         
+        $this->post('/insert[/]',   \SolicitudesApi::class . ':Insert');
+        $this->put('/edit[/]',      \SolicitudesApi::class . ':Edit');    
+        $this->get('/one/{cuil}',   \SolicitudesApi::class . ':GetOneByCuil');    
     });
 
     $app->group('/titulares', function () {
@@ -56,12 +58,12 @@
     });
 
     $app->group('/familiares', function () {
-		$this->get('/all[/]',       \FamiliaresApi::class . ':GetAllByIdTitular');      
+		$this->get('/all[/]',       \FamiliaresApi::class . ':GetAllByIdTitularFormatter');      
     });
     
     $app->group('/cronograma', function () {
         $this->get('/one[/]',       \CronogramaApi::class . ':GetOneByCuitTitular');        
-        $this->get('/all-by-fecha[/]',       \CronogramaApi::class . ':GetAllByFechaAndPuntoEntrega');        
+        $this->get('/all-by-fecha[/]', \CronogramaApi::class . ':GetAllByFechaAndPuntoEntrega');        
     });
 
 	$app->group('/usuarios', function () {
