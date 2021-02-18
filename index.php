@@ -63,7 +63,8 @@
     
     $app->group('/cronograma', function () {
         $this->get('/one[/]',       \CronogramaApi::class . ':GetOneByCuitTitular');        
-        $this->get('/all-by-fecha[/]', \CronogramaApi::class . ':GetAllByFechaAndPuntoEntrega');        
+        $this->get('/all-by-fecha-retiro[/]', \CronogramaApi::class . ':GetCronogramaByFechaRetiro');        
+        $this->get('/all-by-fecha-alta[/]', \CronogramaApi::class . ':GetListadoByFechaAlta');        
     });
 
 	$app->group('/usuarios', function () {

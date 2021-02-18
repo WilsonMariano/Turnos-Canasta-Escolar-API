@@ -75,7 +75,7 @@ class Cronograma {
 			return $objEntidad;
     }
 
-    public static function GetAllByFechaAndPuntoEntrega($fechaDesde, $fechaHasta, $idPuntoEntrega) {
+    public static function GetCronogramaByFechaRetiro($fechaDesde, $fechaHasta, $idPuntoEntrega) {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 
         $query = "
@@ -101,22 +101,74 @@ class Cronograma {
             le.nombre 'Punto entrega',
             ds.valor 'Estado'
         FROM cronograma cr
-        JOIN titulares ti 		ON ti.id = cr.idTitular
-        JOIN familiares fa 		ON fa.idTitular = cr.idTitular
-        JOIN lugaresentrega le	ON le.id = cr.idPuntoEntrega
-        JOIN diccionario ds 	ON ds.clave = cr.estado
-        JOIN diccionario de 	ON de.clave = fa.nivelEducacion
-        JOIN diccionario dt 	ON dt.clave = fa.talleGuardapolvo
-        WHERE cr.fechaEntrega BETWEEN :fechaDesde AND :fechaHasta";
+        JOIN titulares ti 		    ON ti.id = cr.idTitular
+        JOIN familiares fa 		    ON fa.idTitular = cr.idTitular
+        JOIN lugaresentrega le	    ON le.id = cr.idPuntoEntrega
+        JOIN diccionario ds 	    ON ds.clave = cr.estado
+        JOIN diccionario de 	    ON de.clave = fa.nivelEducacion
+        LEFT JOIN diccionario dt 	ON dt.clave = fa.talleGuardapolvo
+        WHERE cr.fechaEntrega BETWEEN :fechaDesde AND :fechaHasta";            
 
         !is_null($idPuntoEntrega) 
-            ? $query .= " AND cr.idPuntoEntrega = :idPuntoEntrega"
-            : null;
+            && $query .= " AND cr.idPuntoEntrega = :idPuntoEntrega";
+
+        $consulta = $objetoAccesoDato->RetornarConsulta($query);
+        $consulta->bindValue(':fechaDesde' , $fechaDesde, \PDO::PARAM_STR);	
+        $consulta->bindValue(':fechaHasta' , $fechaHasta, \PDO::PARAM_STR);	
+        !is_null($idPuntoEntrega) ? $consulta->bindValue(':idPuntoEntrega' , $idPuntoEntrega, \PDO::PARAM_INT) : null;
+        $consulta->execute();
+
+        $rows = PDOHelper::FetchAll($consulta);
+
+        return $rows;
+
+    }
+
+    public static function GetListadoByFechaAlta($fechaDesde, $fechaHasta, $idPuntoEntrega, $estado) {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+
+        $query = "
+        SELECT
+            ti.fechaAlta 'Fecha alta',
+            ti.numAfiliado 'Afiliado',
+            ti. apellido 'Apellido',
+            ti.nombre 'Nombre',
+            ti.cuil 'CUIL',
+            ti.celular 'Celular',
+            ti.razonSocialEmpresa 'Empresa',
+            fa.apellido 'Apeliido hijo',
+            fa.nombre 'Nombre',
+            fa.sexo 'Sexo',
+            fa.edad 'Edad',
+            de.valor 'Nivel',
+            CASE fa.usaGuardapolvo
+            WHEN true THEN 'Si'
+            WHEN false THEN 'No'
+            END AS 'Guardapolvo',
+            dt.valor 'Talle',
+            le.nombre 'Punto entrega',
+            ds.valor 'Estado',
+            cr.observaciones 'Observaciones'
+        FROM cronograma cr
+        JOIN titulares ti 		    ON ti.id = cr.idTitular
+        JOIN familiares fa 		    ON fa.idTitular = cr.idTitular
+        JOIN lugaresentrega le	    ON le.id = cr.idPuntoEntrega
+        JOIN diccionario ds 	    ON ds.clave = cr.estado
+        JOIN diccionario de 	    ON de.clave = fa.nivelEducacion
+        LEFT JOIN diccionario dt 	ON dt.clave = fa.talleGuardapolvo
+        WHERE ti.fechaAlta BETWEEN :fechaDesde AND :fechaHasta";
+
+        !is_null($estado) 
+            && $query .= " AND cr.estado = :estado";
+
+        !is_null($idPuntoEntrega)
+            && $query .= " AND cr.idPuntoEntrega = :idPuntoEntrega";        
 
         $consulta = $objetoAccesoDato->RetornarConsulta($query);
         $consulta->bindValue(':fechaDesde' , $fechaDesde, \PDO::PARAM_STR);	
         $consulta->bindValue(':fechaHasta' , $fechaHasta, \PDO::PARAM_STR);	
         !is_null($idPuntoEntrega) ? $consulta->bindValue(':idPuntoEntrega' , $idPuntoEntrega, \PDO::PARAM_INT) : null;	
+        !is_null($estado) ? $consulta->bindValue(':estado' , $estado, \PDO::PARAM_STR) : null;	
         $consulta->execute();
 
         $rows = PDOHelper::FetchAll($consulta);
