@@ -66,7 +66,7 @@ class Cronograma {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
             $consulta = $objetoAccesoDato->RetornarConsulta("
                 SELECT *
-                FROM cronograma
+                FROM Cronograma
                 WHERE idTitular = :idTitular
             ");
 			$consulta->bindValue(':idTitular' , $idTitular, \PDO::PARAM_INT);		
@@ -100,13 +100,13 @@ class Cronograma {
             dt.valor 'Talle',
             le.nombre 'Punto entrega',
             ds.valor 'Estado'
-        FROM cronograma cr
-        JOIN titulares ti 		    ON ti.id = cr.idTitular
-        JOIN familiares fa 		    ON fa.idTitular = cr.idTitular
-        JOIN lugaresentrega le	    ON le.id = cr.idPuntoEntrega
-        JOIN diccionario ds 	    ON ds.clave = cr.estado
-        JOIN diccionario de 	    ON de.clave = fa.nivelEducacion
-        LEFT JOIN diccionario dt 	ON dt.clave = fa.talleGuardapolvo
+        FROM Cronograma cr
+        JOIN Titulares ti 		    ON ti.id = cr.idTitular
+        JOIN Familiares fa 		    ON fa.idTitular = cr.idTitular
+        JOIN LugaresEntrega le	    ON le.id = cr.idPuntoEntrega
+        JOIN Diccionario ds 	    ON ds.clave = cr.estado
+        JOIN Diccionario de 	    ON de.clave = fa.nivelEducacion
+        LEFT JOIN Diccionario dt 	ON dt.clave = fa.talleGuardapolvo
         WHERE cr.fechaEntrega BETWEEN :fechaDesde AND :fechaHasta";            
 
         !is_null($idPuntoEntrega) 
@@ -149,13 +149,13 @@ class Cronograma {
             le.nombre 'Punto entrega',
             ds.valor 'Estado',
             cr.observaciones 'Observaciones'
-        FROM cronograma cr
-        JOIN titulares ti 		    ON ti.id = cr.idTitular
-        JOIN familiares fa 		    ON fa.idTitular = cr.idTitular
-        JOIN lugaresentrega le	    ON le.id = cr.idPuntoEntrega
-        JOIN diccionario ds 	    ON ds.clave = cr.estado
-        JOIN diccionario de 	    ON de.clave = fa.nivelEducacion
-        LEFT JOIN diccionario dt 	ON dt.clave = fa.talleGuardapolvo
+        FROM Cronograma cr
+        JOIN Titulares ti 		    ON ti.id = cr.idTitular
+        JOIN Familiares fa 		    ON fa.idTitular = cr.idTitular
+        JOIN LugaresEntrega le	    ON le.id = cr.idPuntoEntrega
+        JOIN Diccionario ds 	    ON ds.clave = cr.estado
+        JOIN Diccionario de 	    ON de.clave = fa.nivelEducacion
+        LEFT JOIN Diccionario dt 	ON dt.clave = fa.talleGuardapolvo
         WHERE ti.fechaAlta BETWEEN :fechaDesde AND :fechaHasta";
 
         !is_null($estado) 

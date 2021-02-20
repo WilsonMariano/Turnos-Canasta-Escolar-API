@@ -78,12 +78,12 @@ class SolicitudesApi {
         }
 
         // Busco el cronograma
-        $cronograma = Funciones::GetOne($titular->id, 'cronograma');
+        $cronograma = Funciones::GetOne($titular->id, 'Cronograma');
         $cronograma->idPuntoEntrega = $puntoEntrega->id;
         $cronograma->estado = 'ESTADO_SOLICITUD_1';
 
         // Actualizo el cronograma
-        Funciones::UpdateOne($cronograma, 'cronograma');
+        Funciones::UpdateOne($cronograma, 'Cronograma');
 
         return $response->withJson(true, 200); 
     }
@@ -103,7 +103,7 @@ class SolicitudesApi {
                 if($cronograma) {
                     ($cronograma->estado !== 'ESTADO_SOLICITUD_1' && $cronograma->estado !== 'ESTADO_SOLICITUD_3')
                         ? $error = "La solicitud ya fue aprobada, no puede ser modificada"
-                        : $puntoEntrega = Funciones::GetOne($cronograma->idPuntoEntrega, 'lugaresentrega');
+                        : $puntoEntrega = Funciones::GetOne($cronograma->idPuntoEntrega, 'LugaresEntrega');
                 } else {
                     $error = "No hay cronograma cargados con el CUIL ingresado";
                 }
