@@ -87,9 +87,10 @@ class Cronograma {
             ti.nombre 'Nombre',
             ti.cuil 'CUIL',
             ti.celular 'Celular',
+            ti.cuitEmpresa 'CUIT',
             ti.razonSocialEmpresa 'Empresa',
             fa.apellido 'Apeliido hijo',
-            fa.nombre 'Nombre',
+            fa.nombre 'Nombre hijo',
             fa.sexo 'Sexo',
             fa.edad 'Edad',
             de.valor 'Nivel',
@@ -111,6 +112,8 @@ class Cronograma {
 
         !is_null($idPuntoEntrega) 
             && $query .= " AND cr.idPuntoEntrega = :idPuntoEntrega";
+
+        $query .= " ORDER BY cr.fechaEntrega, ti.cuil DESC";
 
         $consulta = $objetoAccesoDato->RetornarConsulta($query);
         $consulta->bindValue(':fechaDesde' , $fechaDesde, \PDO::PARAM_STR);	
@@ -135,9 +138,10 @@ class Cronograma {
             ti.nombre 'Nombre',
             ti.cuil 'CUIL',
             ti.celular 'Celular',
+            ti.cuitEmpresa 'CUIT',
             ti.razonSocialEmpresa 'Empresa',
             fa.apellido 'Apeliido hijo',
-            fa.nombre 'Nombre',
+            fa.nombre 'Nombre hijo',
             fa.sexo 'Sexo',
             fa.edad 'Edad',
             de.valor 'Nivel',
@@ -162,7 +166,9 @@ class Cronograma {
             && $query .= " AND cr.estado = :estado";
 
         !is_null($idPuntoEntrega)
-            && $query .= " AND cr.idPuntoEntrega = :idPuntoEntrega";        
+            && $query .= " AND cr.idPuntoEntrega = :idPuntoEntrega";     
+            
+        $query .= " ORDER BY ti.fechaAlta, ti.cuil DESC";
 
         $consulta = $objetoAccesoDato->RetornarConsulta($query);
         $consulta->bindValue(':fechaDesde' , $fechaDesde, \PDO::PARAM_STR);	
