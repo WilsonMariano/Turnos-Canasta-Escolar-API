@@ -7,7 +7,7 @@ BEGIN
 	DROP VIEW IF EXISTS vwSolicitudes; 
 	CREATE VIEW vwSolicitudes AS 
 		
-        SELECT TI.fechaAlta, TI.numAfiliado, TI.cuil, TI.apellido, TI.nombre, TI.cuitEmpresa, LE.nombre as 'puntoEntrega', 
+        SELECT TI.fechaAlta, TI.numAfiliado, TI.cuil, TI.apellido, TI.nombre, TI.cuitEmpresa, TI.razonSocialEmpresa, LE.nombre as 'puntoEntrega', 
 		DI.valor as 'nombreEstado', CR.*
 		FROM Titulares as TI  
 		INNER JOIN Cronograma       CR  ON TI.id    = CR.idTitular
